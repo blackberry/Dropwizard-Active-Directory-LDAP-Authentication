@@ -8,7 +8,7 @@ There's more than a few existing dropwizard plugins that handle LDAP authenticat
 
 ## Thanks
 
-The [Yammer LDAP Authentication](https://github.com/yammer/dropwizard-auth-ldap) project and [xaviershay's](https://github.com/xaviershay) (gist)[https://gist.github.com/xaviershay/3167835] provided the much of the code I started with.
+The [Yammer LDAP Authentication](https://github.com/yammer/dropwizard-auth-ldap) project and [xaviershay's](https://github.com/xaviershay) [gist](https://gist.github.com/xaviershay/3167835) provided the much of the code I started with.
 
 ## Authentication:
 
