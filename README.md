@@ -68,17 +68,12 @@ import com.blackberry.bdp.dwauth.ldap.LdapAuthenticator;
 import com.blackberry.bdp.dwauth.ldap.LdapConnectionFactory;
 import com.blackberry.bdp.dwauth.ldap.User;
 import com.blackberry.bdp.dwauth.ldap.LdapConfiguration;
-.
-.
-.
+
 public class YourApplication extends Application&lt;YourConfiguration&gt; {
 
 	@Override
 	public void run(YourConfiguration configuration, Environment environment) 
 	               throws AuthenticationException, Exception {
-		.
-		.
-		.
 		LdapConfiguration ldapConfiguration = configuration.getLdapConfiguration();
 		LdapConnectionFactory ldapConnFactory = new LdapConnectionFactory(ldapConfiguration);
 		LdapAuthenticator ldapAuthenticator = new LdapAuthenticator(ldapConnFactory, ldapConfiguration);		
