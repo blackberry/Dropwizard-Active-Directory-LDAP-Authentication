@@ -25,11 +25,11 @@ One important thing here is that the String's of the memberships Set are full di
 Download this source and perform a 'maven clean install' to create the JAR and import it into your local Maven repo (sorry--not currently published to Maven Central).  After, include this dependency:
 
 &lt;!-- BB Dropwizard AD LDAP Auth --&gt;
-<dependency>
-	<groupId>com.blackberry.bdp.dwauth</groupId>
-	<artifactId>dwMsAdLdapAuth</artifactId>
-	<version>0.1.1</version>
-</dependency>
+&lt;dependency&gt;
+	&lt;groupId&gt;com.blackberry.bdp.dwauth&lt;/groupId&gt;
+	&lt;artifactId&gt;dwMsAdLdapAuth&lt;/artifactId&gt;
+	&lt;version&gt;0.1.1&lt;/version&gt;
+&lt;/dependency&gt;
 
 ## Configuration
 
@@ -69,7 +69,7 @@ import com.blackberry.bdp.dwauth.ldap.LdapConfiguration;
 .
 .
 .
-public class YourApplication extends Application<YourConfiguration> {
+public class YourApplication extends Application&lt;YourConfiguration&gt; {
 
 	@Override
 	public void run(YourConfiguration configuration, Environment environment) 
@@ -80,12 +80,12 @@ public class YourApplication extends Application<YourConfiguration> {
 		LdapConfiguration ldapConfiguration = configuration.getLdapConfiguration();
 		LdapConnectionFactory ldapConnFactory = new LdapConnectionFactory(ldapConfiguration);
 		LdapAuthenticator ldapAuthenticator = new LdapAuthenticator(ldapConnFactory, ldapConfiguration);		
-		Authenticator<BasicCredentials, User> cachedAuthenticator = new CachingAuthenticator<>(
+		Authenticator&lt;BasicCredentials, User&gt; cachedAuthenticator = new CachingAuthenticator&lt;&gt;(
 			environment.metrics(),
 			ldapAuthenticator,
 			configuration.getLdapConfiguration().getCachePolicy());
 		environment.jersey().register(AuthFactory.binder
-			(new BasicAuthFactory<>(cachedAuthenticator, "realm", User.class)));
+			(new BasicAuthFactory&lt;&gt;(cachedAuthenticator, "realm", User.class)));
 ```
 
 ## Securing Resources
@@ -114,7 +114,7 @@ environment.jersey().register(new AccessDeniedHandler());
 
 Then, in the above exaple of securing a resource then you'd (required import: com.blackberry.bdp.dwauth.ldap.AccessDeniedException)
 ```
-if (!user.getMemberships().contains("<whatever full DN you expect>")) {
+if (!user.getMemberships().contains("&lt;whatever full DN you expect&gt;")) {
 	throw new AccessDeniedException("You are not authorized to access this resource");
 }
 ```
