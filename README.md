@@ -24,12 +24,14 @@ One important thing here is that the String's of the memberships Set are full di
 
 Download this source and perform a 'maven clean install' to create the JAR and import it into your local Maven repo (sorry--not currently published to Maven Central).  After, include this dependency:
 
+```
 &lt;!-- BB Dropwizard AD LDAP Auth --&gt;
 &lt;dependency&gt;
 	&lt;groupId&gt;com.blackberry.bdp.dwauth&lt;/groupId&gt;
 	&lt;artifactId&gt;dwMsAdLdapAuth&lt;/artifactId&gt;
 	&lt;version&gt;0.1.1&lt;/version&gt;
 &lt;/dependency&gt;
+```
 
 ## Configuration
 
@@ -108,11 +110,13 @@ public ProtectedObject get(@Auth User user) throws Exception {
 The Dropwizard project encourages throwing exceptions instead of custom responses for errors.  Especially, for RESTful services it's much more standard.  If you want to return a 403 error code when the authenticated user's object doesn't contain a specific DN in it's memberships Set, then you need to register the Exception Mapper contained in this project.  
 
 Do this in the same chunk of code where you instantiate the authenticator (required import: com.blackberry.bdp.dwauth.ldap.AccessDeniedHandler).
+
 ```
 environment.jersey().register(new AccessDeniedHandler());
 ```
 
 Then, in the above exaple of securing a resource then you'd (required import: com.blackberry.bdp.dwauth.ldap.AccessDeniedException)
+
 ```
 if (!user.getMemberships().contains("&lt;whatever full DN you expect&gt;")) {
 	throw new AccessDeniedException("You are not authorized to access this resource");
