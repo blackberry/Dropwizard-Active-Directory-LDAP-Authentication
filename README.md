@@ -16,7 +16,7 @@ An intial user is authenticated and and then binds to the LDAP connection.  When
 
 ## Groups and Memberships
 
-Once a user is authenticated the tree under 'groupBaseDN' is searched for any objects whose name equals 'merbershipIdentifierObjectName' and whose value is the DN of the authenticated user.  The entire DN is then included in a collection of groups.  The user object returned from the authenticate() method is just a simple object with a String name (username) and a Set&lt;String&gt; (memberships).  
+Once a user is authenticated the tree under 'groupBaseDN' is searched for any objects whose name equals 'merbershipIdentifierObjectName' and whose value is the DN of the authenticated user.  The entire DN is then included in a collection of groups.  The user object returned from the authenticate() method is just a simple object with a String name (username) and a Set&<String&> (memberships).  
 
 One important thing here is that the String's of the memberships Set are full distinguished names.  Mostly, becuse this author knows very little about LDAP and wasn't sure if two objects exist in different places of the same tree and are managed by seperate permission systems if there could be a security risks if they shared duplicate object names.
 
@@ -25,12 +25,12 @@ One important thing here is that the String's of the memberships Set are full di
 Download this source and perform a 'maven clean install' to create the JAR and import it into your local Maven repo (sorry--not currently published to Maven Central).  After, include this dependency:
 
 ```
-&lt;!-- BB Dropwizard AD LDAP Auth --&gt;
-&lt;dependency&gt;
-	&lt;groupId&gt;com.blackberry.bdp.dwauth&lt;/groupId&gt;
-	&lt;artifactId&gt;dwMsAdLdapAuth&lt;/artifactId&gt;
-	&lt;version&gt;0.1.1&lt;/version&gt;
-&lt;/dependency&gt;
+&<!-- BB Dropwizard AD LDAP Auth --&>
+&<dependency&>
+	&<groupId&>com.blackberry.bdp.dwauth&</groupId&>
+	&<artifactId&>dwMsAdLdapAuth&</artifactId&>
+	&<version&>0.1.1&</version&>
+&</dependency&>
 ```
 
 ## Configuration
@@ -69,7 +69,7 @@ import com.blackberry.bdp.dwauth.ldap.LdapConnectionFactory;
 import com.blackberry.bdp.dwauth.ldap.User;
 import com.blackberry.bdp.dwauth.ldap.LdapConfiguration;
 
-public class YourApplication extends Application&lt;YourConfiguration&gt; {
+public class YourApplication extends Application&<YourConfiguration&> {
 
 	@Override
 	public void run(YourConfiguration configuration, Environment environment) 
@@ -77,12 +77,12 @@ public class YourApplication extends Application&lt;YourConfiguration&gt; {
 		LdapConfiguration ldapConfiguration = configuration.getLdapConfiguration();
 		LdapConnectionFactory ldapConnFactory = new LdapConnectionFactory(ldapConfiguration);
 		LdapAuthenticator ldapAuthenticator = new LdapAuthenticator(ldapConnFactory, ldapConfiguration);		
-		Authenticator&lt;BasicCredentials, User&gt; cachedAuthenticator = new CachingAuthenticator&lt;&gt;(
+		Authenticator&<BasicCredentials, User&> cachedAuthenticator = new CachingAuthenticator&<&>(
 			environment.metrics(),
 			ldapAuthenticator,
 			configuration.getLdapConfiguration().getCachePolicy());
 		environment.jersey().register(AuthFactory.binder
-			(new BasicAuthFactory&lt;&gt;(cachedAuthenticator, "realm", User.class)));
+			(new BasicAuthFactory&<&>(cachedAuthenticator, "realm", User.class)));
 ```
 
 ## Securing Resources
@@ -113,7 +113,7 @@ environment.jersey().register(new AccessDeniedHandler());
 Then, in the above exaple of securing a resource then you'd (required import: com.blackberry.bdp.dwauth.ldap.AccessDeniedException)
 
 ```
-if (!user.getMemberships().contains("&lt;whatever full DN you expect&gt;")) {
+if (!user.getMemberships().contains("&<whatever full DN you expect&>")) {
 	throw new AccessDeniedException("You are not authorized to access this resource");
 }
 ```
